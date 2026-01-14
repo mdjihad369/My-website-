@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Islamic Website - Noor</title>
+
+  <style>
+    :root{
+      --bg:#07150f;
+      --card: rgba(255,255,255,0.06);
+      --stroke: rgba(255,255,255,0.12);
+      --gold:#f6d58b;
+      --gold2:#ffd27a;
+      --green:#2cffb7;
+      --txt:#eafff4;
+      --muted: rgba(234,255,244,.75);
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Bengali", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% 15%, rgba(44,255,183,.10), transparent 60%),
+        radial-gradient(900px 500px at 70% 30%, rgba(246,213,139,.12), transparent 55%),
+        linear-gradient(180deg, #06110c, #06170f);
+      color:var(--txt);
+    }
+
+    a{color:inherit; text-decoration:none;}
+    .container{width:min(1100px, 92%); margin:0 auto;}
+
+    /* ===== NAV ===== */
+    nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(2,12,8,.55);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:14px 0;
+    }
+    .logo{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.5px;
+    }
+    .logo-badge{
+      width:38px; height:38px; border-radius:12px;
+      display:grid; place-items:center;
+      border:1px solid rgba(246,213,139,.28);
+      background: linear-gradient(180deg, rgba(246,213,139,.18), rgba(0,0,0,.12));
+      box-shadow: 0 0 22px rgba(246,213,139,.10);
+    }
+    .nav-links{
+      display:flex; gap:18px; flex-wrap:wrap;
+      color:rgba(234,255,244,.85);
+      font-weight:600;
+    }
+    .nav-links a{opacity:.85;}
+    .nav-links a:hover{opacity:1; color:var(--gold);}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid rgba(44,255,183,.22);
+      background: linear-gradient(180deg, rgba(44,255,183,.18), rgba(0,0,0,.10));
+      color:rgba(234,255,244,.96);
+      font-weight:700;
+      transition:.18s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35), 0 0 22px rgba(44,255,183,.10);
+      border-color: rgba(44,255,183,.45);
+    }
+    .btn.gold{
+      border-color: rgba(246,213,139,.28);
+      background: linear-gradient(180deg, rgba(246,213,139,.20), rgba(0,0,0,.10));
+    }
+
+    /* ===== HERO ===== */
+    header.hero{
+      position:relative;
+      padding:58px 0 28px;
+      overflow:hidden;
+    }
+    .moon{
+      position:absolute;
+      right:-120px; top:-120px;
+      width:420px; height:420px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(246,213,139,.35), rgba(0,0,0,0) 70%);
+      filter: blur(.2px);
+      opacity:.45;
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width:920px){
+      .hero-grid{grid-template-columns:1fr;}
+    }
+
+    .hero-card{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      box-shadow: 0 18px 70px rgba(0,0,0,.55), 0 0 40px rgba(44,255,183,.06);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 28px),
+        radial-gradient(1200px 500px at 20% 0%, rgba(44,255,183,.12), transparent 55%);
+      opacity:.22;
+      pointer-events:none;
+    }
+    .hero-left{
+      padding:28px;
+      position:relative;
+      z-index:2;
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(246,213,139,.22);
+      color:rgba(246,213,139,.95);
+      background: rgba(246,213,139,.08);
+      letter-spacing:.12em;
+      font-weight:800;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4.4vw, 52px);
+      line-height:1.08;
+      letter-spacing:-.5px;
+    }
+    .lead{
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15.5px;
+      max-width:62ch;
+    }
+    .hero-actions{margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;}
+
+    /* Right hero - masjid */
+    .hero-right{padding:22px; position:relative; z-index:2;}
+    .masjid{
+      height:100%;
+      min-height:260px;
+      border-radius:18px;
+      border:1px solid rgba(246,213,139,.15);
+      background:
+        radial-gradient(800px 280px at 50% 10%, rgba(246,213,139,.22), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.35));
+      position:relative;
+      overflow:hidden;
+    }
+    .masjid svg{
+      position:absolute; inset:auto 0 0 0;
+      width:100%;
+      height:72%;
+      opacity:.98;
+      filter: drop-shadow(0 0 26px rgba(44,255,183,.10));
+    }
+    .stars{
+      position:absolute; inset:0;
+      background-image:
+        radial-gradient(rgba(255,255,255,.75) 1px, transparent 1.2px),
+        radial-gradient(rgba(44,255,183,.55) 1px, transparent 1.2px);
+      background-size: 110px 110px, 160px 160px;
+      background-position: 10px 20px, 40px 60px;
+      opacity:.22;
+      animation: drift 18s linear infinite;
+    }
+    @keyframes drift{
+      0%{transform:translateY(0);}
+      100%{transform:translateY(18px);}
+    }
+
+    /* ===== SECTIONS ===== */
+    section{padding:20px 0;}
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width:920px){ .grid-3{grid-template-columns:1fr;} }
+
+    .card{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(600px 240px at 20% 0%, rgba(44,255,183,.12), transparent 60%);
+      opacity:.35;
+      pointer-events:none;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(246,213,139,.92);
+    }
+    .card p{margin:0; color:rgba(234,255,244,.78); line-height:1.65; font-size:14px;}
+
+    /* ===== TABLE ===== */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      margin-top:10px;
+      background: rgba(0,0,0,.18);
+    }
+    th,td{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+    }
+    th{color:rgba(246,213,139,.95); text-align:left; letter-spacing:.08em; text-transform:uppercase; font-size:12px;}
+    tr:last-child td{border-bottom:none;}
+    td{color:rgba(234,255,244,.86);}
+
+    /* ===== TASBIH ===== */
+    .tasbih{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .counter{
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:.1em;
+      color:rgba(44,255,183,.96);
+      text-shadow: 0 0 25px rgba(44,255,183,.12);
+    }
+    .tiny{color:rgba(234,255,244,.6); font-size:12px; line-height:1.5;}
+    .btn.small{padding:9px 12px; border-radius:12px;}
+
+    /* ===== MODAL ===== */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center; justify-content:center;
+      z-index:99;
+      background:rgba(0,0,0,.55);
+      padding:16px;
+    }
+    .modal.show{display:flex;}
+    .modal-box{
+      width:min(720px, 100%);
+      border-radius:18px;
+      border:1px solid rgba(246,213,139,.22);
+      background: rgba(3,10,7,.92);
+      box-shadow: 0 20px 90px rgba(0,0,0,.72);
+      padding:18px;
+    }
+    .modal-head{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:8px;
+    }
+    .modal-head h3{
+      margin:0;
+      font-size:14px; letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(246,213,139,.95);
+    }
+    .close{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(234,255,244,.9);
+      border-radius:12px;
+      padding:8px 10px;
+      font-weight:800;
+    }
+    .close:hover{border-color:rgba(44,255,183,.4);}
+
+    footer{
+      padding:26px 0 34px;
+      color:rgba(234,255,244,.55);
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,.06);
+      margin-top:10px;
+    }
+
+    /* smooth scroll */
+    html{scroll-behavior:smooth;}
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">
+      <div class="logo-badge">☪</div>
+      <div>
+        <div style="font-size:15px;">Noor Islamic</div>
+        <div style="font-size:12px; opacity:.7;">Quran • Sunnah • Salah</div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#salah">Salah</a>
+      <a href="#quran">Quran</a>
+      <a href="#tasbih">Tasbih</a>
+      <a href="#dua">Dua</a>
+    </div>
+
+    <a class="btn gold" href="#dua">Get Dua</a>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="moon"></div>
+
+  <div class="container hero-grid">
+
+    <div class="hero-card">
+      <div class="hero-left">
+        <div class="kicker">Noor • Islamic Website</div>
+        <h1>আল্লাহর পথে<br/>শান্তি ও নূর</h1>
+        <p class="lead">
+          “নিশ্চয়ই নামাজ অশ্লীলতা ও মন্দ কাজ থেকে বিরত রাখে।”  
+          <br/><span style="color:rgba(246,213,139,.9)">— সূরা আনকাবূত (29:45)</span>
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#salah">Prayer Time</a>
+          <a class="btn gold" href="#quran">Quran & Hadith</a>
+          <a class="btn" href="#" id="openDua">Instant Dua</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-right">
+        <div class="masjid" aria-label="Masjid illustration">
+          <div class="stars"></div>
+          <!-- Simple Masjid SVG -->
+          <svg viewBox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M120 430V280C120 260 140 245 160 245H740C760 245 780 260 780 280V430H120Z"
+                  fill="rgba(44,255,183,0.10)" stroke="rgba(246,213,139,0.35)" stroke-width="3"/>
+            <path d="M220 430V320C220 300 238 285 260 285H640C662 285 680 300 680 320V430H220Z"
+                  fill="rgba(0,0,0,0.20)" stroke="rgba(44,255,183,0.22)" stroke-width="3"/>
+            <path d="M450 90C520 140 560 210 560 290H340C340 210 380 140 450 90Z"
+                  fill="rgba(246,213,139,0.22)" stroke="rgba(246,213,139,0.45)" stroke-width="3"/>
+            <path d="M450 60C465 60 478 72 478 88C478 104 465 116 450 116C435 116 422 104 422 88C422 72 435 60 450 60Z"
+                  fill="rgba(44,255,183,0.25)" stroke="rgba(44,255,183,0.55)" stroke-width="3"/>
+            <path d="M160 430V210C160 190 176 175 196 175H256V430H160Z"
+                  fill="rgba(0,0,0,0.18)" stroke="rgba(246,213,139,0.28)" stroke-width="3"/>
+            <path d="M740 430V210C740 190 724 175 704 175H644V430H740Z"
+                  fill="rgba(0,0,0,0.18)" stroke="rgba(246,213,139,0.28)" stroke-width="3"/>
+            <path d="M400 430V355C400 330 420 310 450 310C480 310 500 330 500 355V430H400Z"
+                  fill="rgba(246,213,139,0.12)" stroke="rgba(246,213,139,0.45)" stroke-width="3"/>
+            <path d="M450 330C465 330 475 342 475 357V430H425V357C425 342 435 330 450 330Z"
+                  fill="rgba(44,255,183,0.10)" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<section id="salah">
+  <div class="container">
+    <div class="grid-3">
+      <div class="card">
+        <h2>Prayer Times (Demo)</h2>
+        <p>এগুলো example টাইম। চাইলে আমি API দিয়ে অটো লোকেশন অনুযায়ী বানিয়ে দিতে পারি ✅</p>
+        <table>
+          <thead>
+            <tr><th>Waqt</th><th>Time</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fajr</td><td>05:12 AM</td></tr>
+            <tr><td>Dhuhr</td><td>12:16 PM</td></tr>
+            <tr><td>Asr</td><td>03:55 PM</td></tr>
+            <tr><td>Maghrib</td><td>05:35 PM</td></tr>
+            <tr><td>Isha</td><td>07:05 PM</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" id="quran">
+        <h2>Quran Verse</h2>
+        <p style="font-size:15px;">
+          <span style="color:var(--gold); font-weight:800;">“فَإِنَّ مَعَ الْعُسْرِ يُسْرًا”</span><br/>
+          “নিশ্চয়ই কষ্টের সাথে স্বস্তি আছে।”  
+          <br/><span style="opacity:.8;">— সূরা আশ-শারহ (94:6)</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Hadith</h2>
+        <p style="font-size:15px;">
+          “সবচেয়ে উত্তম আমল হলো সময়মত সালাত আদায় করা।”  
+          <br/><span style="opacity:.8;">— সহিহ বুখারী</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tasbih">
+  <div class="container">
+    <div class="card">
+      <h2>Digital Tasbih Counter</h2>
+      <p>
+        এখানে তুমি যিকির কাউন্ট করতে পারবে (SubhanAllah / Alhamdulillah / Allahu Akbar)।  
+        33 বা 100 হলে অটো নোটিফাই দিবে ✅
+      </p>
+
+      <div class="tasbih">
+        <div>
+          <div class="counter" id="count">0</div>
+          <div class="tiny" id="hintText">Press “+” to count • Goal: 33</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn small" id="plusBtn">+ Count</button>
+          <button class="btn gold small" id="resetBtn">Reset</button>
+          <button class="btn small" id="goalBtn">Goal: 33</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dua">
+  <div class="container">
+    <div class="grid-3">
+      <div class="card">
+        <h2>Dua of Protection</h2>
+        <p>
+          “بِسْمِ اللهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ”  
+          <br/>অর্থ: আল্লাহর নামে (শুরু করছি), যার নামের সাথে কিছুই ক্ষতি করতে পারে না।
+        </p>
+      </div>
+      <div class="card">
+        <h2>Dua for Forgiveness</h2>
+        <p>
+          “رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ”  
+          <br/>অর্থ: হে আমার রব, আমাকে ক্ষমা করুন এবং আমার তওবা কবুল করুন।
+        </p>
+      </div>
+      <div class="card">
+        <h2>Instant Dua</h2>
+        <p>
+          যেকোনো সময় সুন্দর একটা Dua পেতে নিচে ক্লিক করো।
+        </p>
+        <div style="margin-top:12px;">
+          <a class="btn gold" href="#" id="openDua2">Get Random Dua</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © <span id="year"></span> Noor Islamic Website • Made with HTML, CSS & JavaScript
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="duaModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Random Dua</h3>
+      <button class="close" id="closeModal">✕ Close</button>
+    </div>
+    <p id="duaText" style="color:rgba(234,255,244,.85); line-height:1.7; margin:8px 0 0;"></p>
+  </div>
+</div>
+
+<script>
+  // ===== YEAR =====
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ===== TASBIH COUNTER =====
+  let count = 0;
+  let goal = 33;
+
+  const countEl = document.getElementById("count");
+  const hintEl = document.getElementById("hintText");
+
+  function updateCounter(){
+    countEl.textContent = count;
+    if(count === goal){
+      hintEl.innerHTML = `✅ Goal reached! (${goal}) MashaAllah`;
+    } else if(count > goal){
+      hintEl.innerHTML = `🌙 Continue... (${count}/${goal})`;
+    } else {
+      hintEl.innerHTML = `Press “+” to count • Goal: ${goal}`;
+    }
+  }
+
+  document.getElementById("plusBtn").addEventListener("click", ()=>{
+    count++;
+    updateCounter();
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", ()=>{
+    count = 0;
+    updateCounter();
+  });
+
+  document.getElementById("goalBtn").addEventListener("click", ()=>{
+    goal = (goal === 33) ? 100 : 33;
+    document.getElementById("goalBtn").textContent = "Goal: " + goal;
+    updateCounter();
+  });
+
+  // ===== RANDOM DUA MODAL =====
+  const duaModal = document.getElementById("duaModal");
+  const duaText = document.getElementById("duaText");
+
+  const duas = [
+    "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ — হে আমাদের রব, দুনিয়া ও আখিরাতে কল্যাণ দিন এবং আগুনের শাস্তি থেকে রক্ষা করুন।",
+    "اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ — হে আল্লাহ, আমাকে তওবাকারীদের অন্তর্ভুক্ত করুন এবং পবিত্র বানান।",
+    "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي — হে রব, আমার বুক প্রশস্ত করে দিন এবং আমার কাজ সহজ করে দিন।",
+    "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ — আল্লাহই আমাদের জন্য যথেষ্ট এবং তিনি উত্তম কর্মবিধায়ক।",
+    "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى — হে আল্লাহ, আমি আপনার কাছে হেদায়েত, তাকওয়া, পবিত্রতা ও অভাবমুক্তি চাই।"
+  ];
+
+  function openModal(){
+    const pick = duas[Math.floor(Math.random() * duas.length)];
+    duaText.textContent = pick;
+    duaModal.classList.add("show");
+  }
+  function closeModal(){ duaModal.classList.remove("show"); }
+
+  document.getElementById("openDua").addEventListener("click",(e)=>{e.preventDefault(); openModal();});
+  document.getElementById("openDua2").addEventListener("click",(e)=>{e.preventDefault(); openModal();});
+  document.getElementById("closeModal").addEventListener("click", closeModal);
+
+  duaModal.addEventListener("click", (e)=>{
+    if(e.target === duaModal) closeModal();
+  });
+
+  // Keyboard shortcuts
+  window.addEventListener("keydown",(e)=>{
+    if(e.key === "Escape") closeModal();
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>
